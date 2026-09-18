@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry | Pharoah Group</title>
+    <meta name="description" content="Submit a sales, valuation or finance enquiry to Pharoah Group.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="Home.html"><img src="Images/logo.png" alt="Pharoah Group logo"><span>Pharoah Group</span></a></div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="About us.html">About Us</a></li>
+                <li><a href="Services.html">Vehicles</a></li>
+                <li><a href="Enquiry.html" aria-current="page">Enquiry</a></li>
+                <li><a href="Contact us.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="page-title">
+            <h1>Make an Enquiry</h1>
+            <p>Whether you're interested in a vehicle, selling your car, finance, 6IXPCK Customs, or a Black Velvet rental, our team is here to help.</p>
+        </section>
+
+        <!-- Enquiry form. In Part 3, JavaScript will add client-side
+             validation and dynamic fields depending on enquiry type. -->
+        <section class="enquiry-form">
+            <form action="#" method="post">
+
+                <fieldset>
+                    <legend>Your Details</legend>
+
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Enquiry Details</legend>
+
+                    <label for="enquiry-type">Type of Enquiry</label>
+                    <select id="enquiry-type" name="enquiry-type" required>
+                        <option value="">-- Please select --</option>
+                        <option value="sales">Sales Enquiry</option>
+                        <option value="sell">Sell My Car / Trade-In Valuation</option>
+                        <option value="finance">Finance Application</option>
+                        <option value="6ixpck">6IXPCK Customs Enquiry</option>
+                        <option value="rental">Black Velvet Rental Enquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="vehicle-interest">Vehicle of Interest (if applicable)</label>
+                    <input type="text" id="vehicle-interest" name="vehicle-interest" placeholder="e.g. Lamborghini Huracán">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </fieldset>
+
+                <button type="submit">Submit Enquiry</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-section">
+            <h3>Pharoah Group</h3>
+            <p>3 Winnie Mandela Dr, Bryanston, Sandton, 2191</p>
+            <p>011 444 9460 | info@pharoahgroup.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Services.html">Vehicles</a></li>
+                <li><a href="Contact us.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <p>&copy; 2026 Pharoah Group. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

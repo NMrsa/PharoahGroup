@@ -1,0 +1,853 @@
+/* =========================================================
+   PHAROAH GROUP — style.css
+   Part 2: CSS Styling and Responsive Design (WEDE5020 POE)
+
+   Structure of this file (matches the Part 2 brief sections):
+   1. CSS Reset & Base Style           (2.2)
+   2. Typography Styles                (2.3)
+   3. Layout Structure (Grid/Flexbox)  (2.4)
+   4. Visual Styles & Pseudo-Classes   (2.5)
+   5. Responsive Design / Breakpoints  (3.1 - 3.3)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. CSS RESET & BASE STYLE (2.1 / 2.2)
+   --------------------------------------------------------- */
+
+/* CSS custom properties = a single source of truth for colour/
+   spacing, so most of the site can be restyled by changing only
+   these variables (this is the "cascading, minimum selectors"
+   principle from the brief). */
+:root {
+    --color-bg: #f7f5f0;
+    --color-surface: #ffffff;
+    --color-dark: #1c1c1c;
+    --color-text: #2b2b2b;
+    --color-muted: #6b6b6b;
+    --color-accent: #8a6d2f;      /* champagne/gold */
+    --color-accent-light: #b8934c;
+    --color-border: #e0ddd4;
+
+    --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-body: 'Lato', 'Montserrat', Arial, Helvetica, sans-serif;
+
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2.5rem;
+    --space-xl: 4rem;
+
+    --radius: 6px;
+    --shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.15);
+    --transition: all 0.25s ease-in-out;
+}
+
+/* Reset: removes inconsistent default browser spacing/box-sizing
+   so the same layout renders consistently across browsers. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Base font-size drives every rem value below — changing this
+       ONE line rescales the entire site's typography, which is
+       also how the mobile breakpoints scale type down later. */
+    font-size: 100%; /* 100% = 16px in most browsers */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ---------------------------------------------------------
+   2. TYPOGRAPHY STYLES (2.3)
+   A modular type scale (1.25 "major third" ratio) keeps
+   headings visually harmonious instead of arbitrary sizes.
+   --------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    color: var(--color-dark);
+}
+
+h1 { font-size: 2.75rem; }   /* 44px */
+h2 { font-size: 2rem; margin-bottom: var(--space-sm); }      /* 32px */
+h3 { font-size: 1.375rem; margin-bottom: var(--space-xs); }  /* 22px */
+h4 { font-size: 1.125rem; }  /* 18px */
+
+p {
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+}
+
+.page-title h1 {
+    margin-bottom: var(--space-xs);
+}
+
+.page-title p {
+    color: var(--color-muted);
+    font-size: 1.0625rem;
+}
+
+/* ---------------------------------------------------------
+   3. LAYOUT STRUCTURE — Flexbox + CSS Grid (2.4)
+   --------------------------------------------------------- */
+
+/* --- Header: Flexbox --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    letter-spacing: 0.03em;
+}
+
+header nav ul {
+    display: flex;
+    gap: var(--space-md);
+}
+
+/* --- Main content container --- */
+main {
+    max-width: 75rem; /* 1200px, in rem for scalability */
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-lg);
+}
+
+section {
+    margin-bottom: var(--space-xl);
+}
+
+/* --- Hero: Grid, overlapping text on image --- */
+.hero {
+    display: grid;
+    grid-template-areas: "hero-content";
+    margin-bottom: var(--space-lg);
+    position: relative;
+}
+
+/* CHANGE — hero now wraps its <img> in a <picture> element (see
+   Home.html) so different cropped images can be served at the
+   tablet/mobile breakpoints via <source media="..."> — this is the
+   brief's "picture element" responsive-image requirement.
+   <picture> defaults to display:inline like <img> does NOT — it
+   needs an explicit display:block below to size correctly as a
+   CSS Grid item; without it the browser ignores width/height and
+   the box collapses to the size of its (often broken) content. */
+.hero picture,
+.hero img {
+    grid-area: hero-content;
+    display: block;
+    width: 100%;
+    height: 26rem;
+}
+
+.hero picture img {
+    /* The <img> nested inside <picture> also needs its own sizing —
+       the outer <picture> box doesn't automatically constrain it. */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero h1,
+.hero p,
+.hero .cta-button {
+    grid-area: hero-content;
+    justify-self: start;
+    align-self: end;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero h1 { margin: 0 0 0.5rem 2rem; }
+.hero p  { margin: 0 0 4.5rem 2rem; max-width: 32rem; }
+.hero .cta-button { margin: 0 0 2rem 2rem; }
+
+/* Dark gradient overlay so white hero text stays legible */
+.hero::after {
+    content: "";
+    grid-area: hero-content;
+    background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0) 60%);
+    border-radius: var(--radius);
+}
+
+/* CHANGE — VIDEO SECTION (added this session)
+   <video> has no intrinsic block styling of its own, so it needs
+   width/height rules just like <img> does. width:100% + height:auto
+   keeps it responsive; max-width stops it stretching too wide on
+   very large desktop screens. */
+.video-section video {
+    width: 100%;
+    max-width: 24rem;   /* showroom clip is a vertical (9:16) video */
+    max-height: 85vh;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 0 auto;
+}
+
+.video-section {
+    text-align: center;
+}
+
+/* --- Repeating cards: vehicles / team / locations (Flexbox) ---
+   flex-wrap + a flex-basis per card gives the same responsive
+   "as many columns as fit" behaviour as CSS Grid's auto-fit,
+   but with wider, more predictable browser support. */
+.vehicle-grid,
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.vehicle-grid > .vehicle-card,
+.team-grid > .team-member {
+    flex: 1 1 16rem;
+}
+
+.locations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.locations > .location {
+    flex: 1 1 20rem;
+}
+
+/* --- Footer: named Grid areas (brief 2.4 — grid-template-areas) --- */
+footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "brand links legal";
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+    background-color: var(--color-dark);
+    color: #e8e6e1;
+}
+
+footer .footer-section:nth-child(1) { grid-area: brand; }
+footer .footer-section:nth-child(2) { grid-area: links; }
+footer .footer-section:nth-child(3) { grid-area: legal; }
+
+footer h3 {
+    color: #fff;
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+}
+
+footer a {
+    color: #cfcabf;
+}
+
+/* --- Enquiry / Contact forms: Flexbox --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 32rem;
+}
+
+fieldset {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+legend {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    padding: 0 var(--space-xs);
+    color: var(--color-accent);
+}
+
+label {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    margin-bottom: -0.5rem;
+}
+
+/* ---------------------------------------------------------
+   4. VISUAL STYLES & PSEUDO-CLASSES (2.5)
+   --------------------------------------------------------- */
+
+/* --- Navigation links --- */
+header nav a {
+    position: relative;
+    padding: 0.25rem 0;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: var(--transition);
+}
+
+header nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.25s ease-in-out;
+}
+
+header nav a:hover,
+header nav a:focus {
+    color: var(--color-accent);
+}
+
+header nav a:hover::after,
+header nav a:focus::after {
+    width: 100%;
+}
+
+header nav a[aria-current="page"] {
+    color: var(--color-accent);
+}
+header nav a[aria-current="page"]::after {
+    width: 100%;
+}
+
+header nav a:active {
+    color: var(--color-accent-light);
+}
+
+/* --- Buttons / CTAs --- */
+.cta-button,
+button,
+input[type="submit"] {
+    display: inline-block;
+    background-color: var(--color-dark);
+    color: #fff;
+    border: 1px solid var(--color-dark);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.cta-button:hover,
+button:hover,
+input[type="submit"]:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.cta-button:focus,
+button:focus,
+input[type="submit"]:focus {
+    outline: 3px solid var(--color-accent-light);
+    outline-offset: 2px;
+}
+
+.cta-button:active,
+button:active,
+input[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* --- Cards (vehicles / team) --- */
+.vehicle-card,
+.team-member {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.vehicle-card:hover,
+.team-member:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+}
+
+.vehicle-card a {
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.vehicle-card a:hover,
+.vehicle-card a:focus {
+    text-decoration: underline;
+}
+
+/* --- Locations (contact page) --- */
+.location {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+    box-shadow: var(--shadow);
+}
+
+.location iframe {
+    border-radius: var(--radius);
+    margin-top: var(--space-xs);
+}
+
+.location img {
+    margin-bottom: var(--space-xs);
+}
+
+/* --- Sections with tinted backgrounds --- */
+.why-us,
+.newsletter,
+.cta-banner,
+.dealership-services {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+}
+
+.cta-banner {
+    text-align: center;
+    background-color: var(--color-dark);
+    color: #fff;
+    border: none;
+}
+.cta-banner h2 { color: #fff; }
+
+.why-us li,
+.dealership-services li {
+    margin-bottom: var(--space-xs);
+    padding-left: 1.25rem;
+    position: relative;
+}
+.why-us li::before,
+.dealership-services li::before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+/* --- Form fields --- */
+input,
+select,
+textarea {
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background-color: var(--color-surface);
+    transition: var(--transition);
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: var(--color-accent-light);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(138, 109, 47, 0.2);
+}
+
+input:active,
+select:active,
+textarea:active {
+    border-color: var(--color-accent);
+}
+
+
+/* ---------------------------------------------------------
+   6. CONTENT COMPONENTS — added to mirror pharoahgroup.com's
+   real information architecture: two vehicle tiers, sub-brand
+   highlight cards, and a "culture" text+image section.
+   Reuses the same card/shadow/hover language as the rest of
+   the site (var(--shadow), var(--transition), etc.) so nothing
+   looks bolted-on. All new rules sit here rather than scattered
+   through the file, so the deliberate structure stays visible.
+   --------------------------------------------------------- */
+
+/* --- Two-tier vehicle showcase (Auto Investments / ORIGINS) --- */
+.tier-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.tier-card {
+    flex: 1 1 20rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.tier-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.tier-card img {
+    border-radius: 0; /* image sits flush at the top of the card */
+    height: 14rem;
+    object-fit: cover;
+    width: 100%;
+}
+
+.tier-card .tier-body {
+    padding: var(--space-md);
+}
+
+.brand-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.brand-tags li {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-muted);
+}
+
+/* --- Sub-brand highlight cards (6IXPCK, Skär Wheels, Espresso...) --- */
+.subbrand-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.subbrand-card {
+    flex: 1 1 13rem;
+    text-align: center;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.subbrand-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-accent);
+}
+
+.subbrand-card img {
+    margin: 0 auto var(--space-sm);
+    height: 6rem;
+    width: 6rem;
+    object-fit: cover;
+    border-radius: 50%; /* circular badge-style image, like a logo mark */
+}
+
+/* --- Quick-action cards (Sell Your Car / Finance) --- */
+.action-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.action-card {
+    flex: 1 1 18rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background-color: var(--color-dark);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    box-shadow: var(--shadow);
+}
+
+.action-card img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.action-card h3 { color: #fff; }
+.action-card p { color: #cfcabf; margin-bottom: var(--space-xs); }
+
+/* --- Culture section: text beside a large image (Flexbox) --- */
+.culture-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.culture-section img {
+    flex: 1 1 22rem;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.culture-section .culture-text {
+    flex: 1 1 22rem;
+}
+
+/* --- Real photo sizing (added when the site images were dropped in) ---
+   The photos come in mixed shapes (portrait, square, landscape), so each
+   slot gets a fixed aspect ratio + object-fit: cover to keep cards even.
+   Per-image focal points are set with inline object-position. */
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.logo img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.vehicle-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-bottom: var(--space-xs);
+}
+
+.team-member img {
+    width: 100%;
+    max-width: 15.6rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin: 0 auto var(--space-xs);
+}
+
+.about-hero img {
+    width: 100%;
+    max-width: 40rem;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 65%;
+    margin: 0 auto;
+}
+
+.location img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 65%;
+}
+
+/* --- Social links row (footer) --- */
+.social-links {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
+}
+
+.social-links a {
+    font-weight: 700;
+    color: #cfcabf;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+    color: var(--color-accent-light);
+}
+
+
+   Breakpoints: Desktop (default, > 1024px) → Tablet (≤1024px)
+   → Mobile (≤600px). Uses relative units (rem/%) throughout so
+   the html{font-size} change at each breakpoint rescales all
+   text and spacing site-wide.
+   ========================================================= */
+
+/* ---------- TABLET (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+    html { font-size: 95%; }
+
+    main {
+        padding: var(--space-md);
+    }
+
+    /* Layout: vehicle/team cards drop to ~2 per row on tablet */
+    .vehicle-grid > .vehicle-card,
+    .team-grid > .team-member {
+        flex-basis: calc(50% - var(--space-md) / 2);
+    }
+
+    .locations > .location {
+        flex-basis: 100%;
+    }
+
+    /* Footer: 2 columns on tablet instead of 3 */
+    footer {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "brand links"
+            "legal legal";
+    }
+
+    .hero picture, .hero img { height: 20rem; } /* CHANGE: was .hero img only — now also targets the picture wrapper */
+
+    /* New components: tier/action cards drop to ~2 per row, in
+       keeping with the vehicle/team card behaviour above */
+    .tier-card,
+    .action-card { flex-basis: calc(50% - var(--space-md) / 2); }
+}
+
+/* ---------- MOBILE (≤ 600px) ---------- */
+@media (max-width: 600px) {
+    html { font-size: 87.5%; }
+
+    /* Typography: scale headings down further for small screens */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.125rem; }
+
+    /* Navigation: stacks vertically and centres on mobile,
+       instead of the horizontal desktop nav bar */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--space-sm);
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: var(--space-xs);
+        width: 100%;
+    }
+
+    header nav a {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    /* Layout: all cards collapse to a single column on mobile */
+    .vehicle-grid > .vehicle-card,
+    .team-grid > .team-member,
+    .locations > .location {
+        flex-basis: 100%;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "brand"
+            "links"
+            "legal";
+        text-align: left;
+    }
+
+    main {
+        padding: var(--space-sm);
+    }
+
+    /* Images: hero shrinks and text sits closer together
+       CHANGE: rule now also targets .hero picture, not just .hero img */
+    .hero picture, .hero img { height: 14rem; }
+    .hero h1 { font-size: 1.5rem; margin-left: 1rem; }
+    .hero p  { font-size: 0.9rem; margin-left: 1rem; margin-bottom: 3rem; }
+    .hero .cta-button { margin-left: 1rem; }
+
+    form {
+        max-width: 100%;
+    }
+
+    /* CHANGE — video shrinks to full container width on mobile,
+       matching the same "no max-width cap" pattern as everything
+       else at this breakpoint. */
+    .video-section video {
+        max-width: 100%;
+    }
+
+    /* New components: everything drops to a single column, and the
+       culture section stacks image-above-text instead of side-by-side */
+    .tier-card,
+    .action-card,
+    .subbrand-card {
+        flex-basis: 100%;
+    }
+
+    .action-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .culture-section {
+        flex-direction: column;
+    }
+
+    .culture-section img {
+        height: 14rem;
+    }
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharoah Group | Luxury & Supercar Dealer in Bryanston, Sandton</title>
+    <meta name="description" content="Pharoah Group is a luxury and supercar dealership in Bryanston, Sandton — vehicle sales, 6IXPCK Customs, Skär Wheels, Espresso, and Black Velvet Rentals.">
+    <!-- Google Fonts: Playfair Display (headings) + Lato (body) — used by CSS/style.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <!-- ===================== HEADER / NAVIGATION ===================== -->
+    <header>
+        <div class="logo"><a href="Home.html"><img src="Images/logo.png" alt="Pharoah Group logo"><span>Pharoah Group</span></a></div>
+        <nav>
+            <ul>
+                <li><a href="Home.html" aria-current="page">Home</a></li>
+                <li><a href="About us.html">About Us</a></li>
+                <li><a href="Services.html">Vehicles</a></li>
+                <li><a href="Enquiry.html">Enquiry</a></li>
+                <li><a href="Contact us.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero: paraphrased from Pharoah Group's real tagline
+             "More Than Cars. It's Culture." — not quoted verbatim,
+             restated in our own words for this coursework site. -->
+        <section class="hero">
+           <picture>
+                <source media="(max-width: 600px)"
+                    srcset="Images/hero pic.png">
+                <source media="(max-width: 1024px)"
+                    srcset="Images/hero%20pic.png">
+                <img src="Images/hero pic.png"
+                    sizes="100vw"
+                    alt="Pharoah Group showroom floor in Bryanston, Sandton">
+</picture>
+            <h1>More Than Cars. It's Culture.</h1>
+            <p>Bryanston, Sandton's home of luxury and supercar ownership — where every visit is an experience, not just a transaction.</p>
+            <a href="Enquiry.html" class="cta-button">Book a Viewing</a>
+        </section>
+
+        <!-- Brief introduction / value proposition -->
+        <section class="intro">
+            <h2>Welcome to Pharoah Group</h2>
+            <p>
+                Founded by Scott Pharoah and incorporated in October 2006, Pharoah Group has grown
+                from a single idea &mdash; that buying a car should be a moment, not just a transaction &mdash;
+                into a Bryanston-based lifestyle destination built around luxury vehicle ownership.
+                <a href="About us.html">Learn more about our story</a>.
+            </p>
+        </section>
+
+        <!-- ================= TWO-TIER VEHICLE SHOWCASE =================
+             Mirrors the real site's two collections: a flagship tier over
+             R1 million, and an accessible premium tier under R1 million. -->
+        <section class="collections">
+            <h2>Explore Our Collections</h2>
+            <div class="tier-grid">
+                <article class="tier-card">
+                    <!-- IMAGE SLOT: a flagship supercar (e.g. Lamborghini or
+                         Porsche) shot on the showroom floor -->
+                    <img src="Images/Investment.png"
+                         style="object-position: 50% 62%;"
+                         alt="Orange supercar on the Pharoah Auto Investments showroom floor">
+                    <div class="tier-body">
+                        <h3>Pharoah Auto Investments</h3>
+                        <p>Our flagship collection of vehicles over R1 million.</p>
+                        <ul class="brand-tags">
+                            <li>Lamborghini</li><li>Porsche</li><li>Ferrari</li>
+                            <li>Land Rover</li><li>BMW</li><li>Mercedes</li>
+                        </ul>
+                        <a href="Services.html">Browse All</a>
+                    </div>
+                </article>
+                <article class="tier-card">
+                    <!-- IMAGE SLOT: a premium executive car (e.g. BMW M or
+                         Audi RS) shot on the showroom floor -->
+                    <img src="Images/BMW%20M4.png"
+                         style="object-position: 50% 35%;"
+                         alt="Blue BMW M4 from the ORIGINS by Pharoah collection">
+                    <div class="tier-body">
+                        <h3>ORIGINS by Pharoah</h3>
+                        <p>Premium vehicles up to R1 million.</p>
+                        <ul class="brand-tags">
+                            <li>BMW</li><li>Mercedes</li><li>Audi</li>
+                            <li>Volkswagen</li><li>Land Rover</li>
+                        </ul>
+                        <a href="Services.html">Browse All</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= QUICK ACTIONS =================
+             Mirrors the real site's "Sell Your Car" / "Finance Made
+             Simple" prompts — both route to the Enquiry page since
+             this coursework site uses one consolidated enquiry form. -->
+        <section class="quick-actions">
+            <div class="action-grid">
+                <article class="action-card">
+                    <!-- IMAGE SLOT: small icon/photo representing a car key
+                         handover or valuation clipboard -->
+                    <img src="https://placehold.co/200x200?text=Sell" alt="">
+                    <div>
+                        <h3>The Easiest Way to Sell Your Vehicle</h3>
+                        <p>Get a fair, fast offer on your current car.</p>
+                        <a href="Enquiry.html" class="cta-button">Get Your Offer</a>
+                    </div>
+                </article>
+                <article class="action-card">
+                    <!-- IMAGE SLOT: small icon/photo representing finance
+                         paperwork or a handshake -->
+                    <img src="https://placehold.co/200x200?text=Finance" alt="">
+                    <div>
+                        <h3>Finance Made Simple</h3>
+                        <p>Finance your next vehicle with tailored packages.</p>
+                        <a href="Enquiry.html" class="cta-button">Apply Now</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= SUB-BRAND HIGHLIGHTS =================
+             Pharoah Group operates several in-house divisions beyond
+             vehicle sales — this grid gives each one visibility, as
+             the real site does with its dedicated feature blocks. -->
+        <section class="subbrands">
+            <h2>Beyond the Showroom</h2>
+            <div class="subbrand-grid">
+                <article class="subbrand-card">
+                    <!-- IMAGE SLOT: 6IXPCK Customs workshop / a wrapped or
+                         custom-wheeled vehicle -->
+                    <img src="Images/6ixPCK%20Customs.png" alt="6IXPCK Customs paint protection film advert with an orange Lamborghini Urus">
+                    <h4>6IXPCK Customs</h4>
+                    <p>Bespoke styling, wraps and custom builds.</p>
+                    <a href="Services.html">Learn More</a>
+                </article>
+                <article class="subbrand-card">
+                    <!-- IMAGE SLOT: a set of custom forged wheels -->
+                    <img src="Images/Shar%20wheels.png" alt="Skär Wheels black forged wheel">
+                    <h4>Sk&auml;r Wheels</h4>
+                    <p>Custom forged wheels, made in-house.</p>
+                    <a href="Services.html">View Collection</a>
+                </article>
+                <article class="subbrand-card">
+                    <!-- IMAGE SLOT: the in-showroom espresso bar/lounge -->
+                    <img src="Images/Espresso.jpg" style="object-position: 50% 60%;" alt="Pharoah Espresso lounge with wooden tables and chairs">
+                    <h4>Espresso</h4>
+                    <p>Our in-showroom coffee bar and lounge.</p>
+                    <a href="Services.html">Learn More</a>
+                </article>
+                <article class="subbrand-card">
+                    <!-- IMAGE SLOT: a vehicle mid-detail at the car wash bay -->
+                    <img src="Images/Foam%20car%20wash.png" alt="Car covered in foam at the FOAM Car Wash bay">
+                    <h4>FOAM Car Wash</h4>
+                    <p>Premium in-house detailing and car wash.</p>
+                    <a href="Services.html">Learn More</a>
+                </article>
+                <article class="subbrand-card">
+                    <!-- IMAGE SLOT: a rental-fleet vehicle at an event -->
+                    <img src="Images/Rentals.png" alt="White BMW from the Black Velvet Rentals fleet">
+                    <h4>Black Velvet Rentals</h4>
+                    <p>Premium occasion-based vehicle rentals.</p>
+                    <a href="Services.html">Book a Rental</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- CHANGE — VIDEO SLOT
+             A showroom/brand tour video section. Drop your video
+             file into the Videos/ folder and update the <source>
+             src below to point at it, e.g. "Videos/showroom-tour.mp4".
+             Two <source> formats are provided so the browser picks
+             whichever it supports (mp4 has the widest support;
+             webm is a smaller, open-format fallback/alternative).
+             The text between <video> and </video> only shows if the
+             visitor's browser can't play video at all.
+             The `poster` attribute is the image shown before the
+             visitor presses play — swap it for a real still frame
+             from the video once you have one. -->
+        <section class="video-section">
+            <h2>Take a Video Tour</h2>
+            <p>Step inside our Bryanston showroom and see the collection up close.</p>
+            <!-- Two encodes of the same showroom video: an H.264 version
+                 (plays in every browser) listed first, and the original
+                 HEVC file as a fallback. -->
+            <video controls preload="metadata" playsinline
+                   poster="Videos/Show%20room-poster.jpg">
+                <source src="Videos/Show%20room-h264.mp4" type="video/mp4">
+                <source src="Videos/Show%20room.mp4" type="video/mp4">
+                Your browser does not support embedded video.
+                <a href="Videos/Show%20room-h264.mp4">Download the video</a> instead.
+            </video>
+        </section>
+
+        <!-- ================= CULTURE SECTION =================
+             Paraphrased from the real site's "More Than a Dealership"
+             messaging — restated in our own words, not copied. -->
+        <section class="culture-section">
+            <!-- IMAGE SLOT: the "culture wall" — a curated display wall
+                 of memorabilia, art or branding inside the showroom -->
+            <img src="Images/Culture.png" style="object-position: 50% 40%;" alt="Pharoah Group client celebrating a vehicle handover with a red bow on the car">
+            <div class="culture-text">
+                <h2>More Than a Dealership</h2>
+                <p>
+                    Pharoah Group is built around culture, celebration and connection &mdash; a
+                    space where luxury vehicles, supercars and premium SUVs exist beyond the
+                    traditional showroom floor. From the in-house Espresso lounge to FOAM Car
+                    Wash and every vehicle handover, the experience is designed to go further
+                    than the sale itself.
+                </p>
+                <a href="Contact us.html" class="cta-button">Contact Us</a>
+            </div>
+        </section>
+
+        <!-- Why choose us -->
+        <section class="why-us">
+            <h2>Why Buy From Pharoah</h2>
+            <p>You're not just buying a car &mdash; you're buying into a standard.</p>
+            <ul>
+                <li><strong>Curated Selection:</strong> Every vehicle is checked before it reaches the floor.</li>
+                <li><strong>Honest Value:</strong> Transparent pricing and fair trade-in offers.</li>
+                <li><strong>A Culture of Its Own:</strong> An experience you won't find at an ordinary dealership.</li>
+            </ul>
+        </section>
+
+        <!-- Newsletter sign-up -->
+        <section class="newsletter">
+            <h2>Stay Informed</h2>
+            <form action="#" method="post">
+                <label for="newsletter-email">Subscribe for the latest news, releases and exclusives:</label>
+                <input type="email" id="newsletter-email" name="newsletter-email" placeholder="you@example.com" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+
+        <!-- Call to action banner -->
+        <section class="cta-banner">
+            <h2>Book a Viewing</h2>
+            <p>Schedule your visit to the Pharoah Group showroom today.</p>
+            <a href="Enquiry.html" class="cta-button">Schedule My Visit</a>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="footer-section">
+            <h3>Pharoah Group</h3>
+            <p>3 Winnie Mandela Dr, Bryanston, Sandton, 2191</p>
+            <p>011 444 9460 | info@pharoahgroup.com</p>
+            <!-- Social links: Facebook URL is verified real; the others
+                 are placeholders — replace with the real handles. -->
+            <div class="social-links">
+                <a href="https://www.facebook.com/PharoahGroup/">Facebook</a>
+                <a href="#">TikTok</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="About us.html">About Us</a></li>
+                <li><a href="Services.html">Vehicles</a></li>
+                <li><a href="Contact us.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <p>&copy; 2026 Pharoah Group. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
