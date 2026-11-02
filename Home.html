@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharoah Group | Luxury & Supercar Dealer in Bryanston, Sandton</title>
     <meta name="description" content="Pharoah Group is a luxury and supercar dealership in Bryanston, Sandton — vehicle sales, 6IXPCK Customs, Skär Wheels, Espresso, and Black Velvet Rentals.">
+    <link rel="canonical" href="https://pharoah-group-poe.netlify.app/Home.html">
+    <meta name="keywords" content="luxury car dealership Sandton, supercar dealer Bryanston, Pharoah Group, buy supercars South Africa, ORIGINS by Pharoah, Pharoah Auto Investments">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph / social sharing (off-page SEO: social media promotion) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Pharoah Group | Luxury & Supercar Dealer in Bryanston, Sandton">
+    <meta property="og:description" content="Pharoah Group is a luxury and supercar dealership in Bryanston, Sandton — vehicle sales, 6IXPCK Customs, Skär Wheels, Espresso, and Black Velvet Rentals.">
+    <meta property="og:image" content="https://pharoah-group-poe.netlify.app/Images/hero-632w.jpg">
+    <meta property="og:url" content="https://pharoah-group-poe.netlify.app/Home.html">
+    <meta property="og:site_name" content="Pharoah Group">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pharoah Group | Luxury & Supercar Dealer in Bryanston, Sandton">
+    <meta name="twitter:description" content="Pharoah Group is a luxury and supercar dealership in Bryanston, Sandton — vehicle sales, 6IXPCK Customs, Skär Wheels, Espresso, and Black Velvet Rentals.">
+    <meta name="twitter:image" content="https://pharoah-group-poe.netlify.app/Images/hero-632w.jpg">
+    <!-- Basic security hardening (Part 3: "Security measures to protect your website from attacks") -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <!-- Google Fonts: Playfair Display (headings) + Lato (body) — used by CSS/style.css -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -14,8 +31,9 @@
 
     <!-- ===================== HEADER / NAVIGATION ===================== -->
     <header>
-        <div class="logo"><a href="Home.html"><img src="Images/logo.png" alt="Pharoah Group logo"><span>Pharoah Group</span></a></div>
-        <nav>
+        <div class="logo"><img src="Images/logo.png" alt="" class="logo-img" width="32" height="32">Pharoah Group</div>
+        <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+        <nav id="site-nav">
             <ul>
                 <li><a href="Home.html" aria-current="page">Home</a></li>
                 <li><a href="About us.html">About Us</a></li>
@@ -32,15 +50,19 @@
              "More Than Cars. It's Culture." — not quoted verbatim,
              restated in our own words for this coursework site. -->
         <section class="hero">
-           <picture>
-                <source media="(max-width: 600px)"
-                    srcset="Images/hero pic.png">
-                <source media="(max-width: 1024px)"
-                    srcset="Images/hero%20pic.png">
-                <img src="Images/hero pic.png"
-                    sizes="100vw"
-                    alt="Pharoah Group showroom floor in Bryanston, Sandton">
-</picture>
+            <picture>
+                <!-- Real supplied showroom/location photo (Location.png),
+                     resized to its two genuinely distinct widths. We do not
+                     pad srcset with duplicate-resolution copies: the source
+                     photo's native width is 632px, so 632w is the largest
+                     honest entry. -->
+                <img src="Images/hero pic.png"-
+                     srcset="Images/hero pic.png 600w,
+                             Images/hero pic.png 632w"
+                     sizes="100vw"
+                     width="632" height="832"
+                     alt="Pharoah Group showroom location, Bryanston, Sandton">
+            </picture>
             <h1>More Than Cars. It's Culture.</h1>
             <p>Bryanston, Sandton's home of luxury and supercar ownership — where every visit is an experience, not just a transaction.</p>
             <a href="Enquiry.html" class="cta-button">Book a Viewing</a>
@@ -64,11 +86,9 @@
             <h2>Explore Our Collections</h2>
             <div class="tier-grid">
                 <article class="tier-card">
-                    <!-- IMAGE SLOT: a flagship supercar (e.g. Lamborghini or
-                         Porsche) shot on the showroom floor -->
-                    <img src="Images/Investment.png"
-                         style="object-position: 50% 62%;"
-                         alt="Orange supercar on the Pharoah Auto Investments showroom floor">
+                    <img src="Images/tier-investments.jpg"
+                         width="471" height="525" loading="lazy"
+                         alt="Pharoah Auto Investments flagship vehicle">
                     <div class="tier-body">
                         <h3>Pharoah Auto Investments</h3>
                         <p>Our flagship collection of vehicles over R1 million.</p>
@@ -80,11 +100,9 @@
                     </div>
                 </article>
                 <article class="tier-card">
-                    <!-- IMAGE SLOT: a premium executive car (e.g. BMW M or
-                         Audi RS) shot on the showroom floor -->
-                    <img src="Images/BMW%20M4.png"
-                         style="object-position: 50% 35%;"
-                         alt="Blue BMW M4 from the ORIGINS by Pharoah collection">
+                    <img src="Images/tier-origins.jpg"
+                         width="595" height="621" loading="lazy"
+                         alt="ORIGINS by Pharoah premium vehicle">
                     <div class="tier-body">
                         <h3>ORIGINS by Pharoah</h3>
                         <p>Premium vehicles up to R1 million.</p>
@@ -107,7 +125,7 @@
                 <article class="action-card">
                     <!-- IMAGE SLOT: small icon/photo representing a car key
                          handover or valuation clipboard -->
-                    <img src="https://placehold.co/200x200?text=Sell" alt="">
+                    <img src="Images/Key.png" alt="">
                     <div>
                         <h3>The Easiest Way to Sell Your Vehicle</h3>
                         <p>Get a fair, fast offer on your current car.</p>
@@ -117,7 +135,7 @@
                 <article class="action-card">
                     <!-- IMAGE SLOT: small icon/photo representing finance
                          paperwork or a handshake -->
-                    <img src="https://placehold.co/200x200?text=Finance" alt="">
+                    <img src="Images/Finance.png" alt="">
                     <div>
                         <h3>Finance Made Simple</h3>
                         <p>Finance your next vehicle with tailored packages.</p>
@@ -135,37 +153,31 @@
             <h2>Beyond the Showroom</h2>
             <div class="subbrand-grid">
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: 6IXPCK Customs workshop / a wrapped or
-                         custom-wheeled vehicle -->
-                    <img src="Images/6ixPCK%20Customs.png" alt="6IXPCK Customs paint protection film advert with an orange Lamborghini Urus">
+                    <img src="Images/subbrand-6ixpck.jpg" width="400" height="389" loading="lazy" alt="6IXPCK Customs workshop" data-lightbox="gallery" data-caption="6IXPCK Customs">
                     <h4>6IXPCK Customs</h4>
                     <p>Bespoke styling, wraps and custom builds.</p>
                     <a href="Services.html">Learn More</a>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: a set of custom forged wheels -->
-                    <img src="Images/Shar%20wheels.png" alt="Skär Wheels black forged wheel">
+                    <img src="Images/subbrand-skar-wheels.jpg" width="400" height="407" loading="lazy" alt="Skär Wheels custom forged wheel" data-lightbox="gallery" data-caption="Skär Wheels">
                     <h4>Sk&auml;r Wheels</h4>
                     <p>Custom forged wheels, made in-house.</p>
                     <a href="Services.html">View Collection</a>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: the in-showroom espresso bar/lounge -->
-                    <img src="Images/Espresso.jpg" style="object-position: 50% 60%;" alt="Pharoah Espresso lounge with wooden tables and chairs">
+                    <img src="Images/subbrand-espresso.jpg" width="400" height="600" loading="lazy" alt="Pharoah Espresso in-showroom lounge" data-lightbox="gallery" data-caption="Pharoah Espresso">
                     <h4>Espresso</h4>
                     <p>Our in-showroom coffee bar and lounge.</p>
                     <a href="Services.html">Learn More</a>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: a vehicle mid-detail at the car wash bay -->
-                    <img src="Images/Foam%20car%20wash.png" alt="Car covered in foam at the FOAM Car Wash bay">
+                    <img src="Images/subbrand-foam.jpg" width="400" height="231" loading="lazy" alt="FOAM Car Wash detailing bay" data-lightbox="gallery" data-caption="FOAM Car Wash">
                     <h4>FOAM Car Wash</h4>
                     <p>Premium in-house detailing and car wash.</p>
                     <a href="Services.html">Learn More</a>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: a rental-fleet vehicle at an event -->
-                    <img src="Images/Rentals.png" alt="White BMW from the Black Velvet Rentals fleet">
+                    <img src="Images/subbrand-rentals.jpg" width="400" height="292" loading="lazy" alt="Black Velvet Rentals fleet vehicle" data-lightbox="gallery" data-caption="Black Velvet Rentals">
                     <h4>Black Velvet Rentals</h4>
                     <p>Premium occasion-based vehicle rentals.</p>
                     <a href="Services.html">Book a Rental</a>
@@ -173,40 +185,45 @@
             </div>
         </section>
 
-        <!-- CHANGE — VIDEO SLOT
-             A showroom/brand tour video section. Drop your video
-             file into the Videos/ folder and update the <source>
-             src below to point at it, e.g. "Videos/showroom-tour.mp4".
-             Two <source> formats are provided so the browser picks
-             whichever it supports (mp4 has the widest support;
-             webm is a smaller, open-format fallback/alternative).
-             The text between <video> and </video> only shows if the
-             visitor's browser can't play video at all.
-             The `poster` attribute is the image shown before the
-             visitor presses play — swap it for a real still frame
-             from the video once you have one. -->
-        <section class="video-section">
-            <h2>Take a Video Tour</h2>
-            <p>Step inside our Bryanston showroom and see the collection up close.</p>
-            <!-- Two encodes of the same showroom video: an H.264 version
-                 (plays in every browser) listed first, and the original
-                 HEVC file as a fallback. -->
-            <video controls preload="metadata" playsinline
-                   poster="Videos/Show%20room-poster.jpg">
-                <source src="Videos/Show%20room-h264.mp4" type="video/mp4">
-                <source src="Videos/Show%20room.mp4" type="video/mp4">
-                Your browser does not support embedded video.
-                <a href="Videos/Show%20room-h264.mp4">Download the video</a> instead.
-            </video>
-        </section>
+       <!-- VIDEO SLOT: autoplaying showroom tour.
+         autoplay    = start playing as soon as the page loads
+        muted       = REQUIRED, browsers block autoplay with sound
+        playsinline = stops iPhones from forcing fullscreen
+        loop        = restarts when it ends (delete if you don't want this)
+        controls    = lets visitors pause or turn the sound on
+        preload     = "auto" starts loading the video straight away -->
+    <section class="video-section">
+        <h2>Take a Video Tour</h2>
+        <p>Step inside our Bryanston showroom and see the collection up close.</p>
 
+        <div class="video-wrap">
+         <!-- No "controls" attribute = no time, no volume, no fullscreen, no ⋮ menu.
+             muted + autoplay + loop + playsinline = silent, auto-starting loop.
+             disablepictureinpicture = removes the picture-in-picture button. -->
+         <video id="showroom-video"
+               autoplay muted loop playsinline
+               disablepictureinpicture
+               disableremoteplayback
+               controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+               preload="auto"
+               poster="Images/video-poster.jpg"
+               aria-label="Pharoah Group showroom tour (silent video)">
+            <source src="Videos/Show%20room%20tour.mp4" type="video/mp4">
+            <source src="Videos/Show%20room%20tour.webm" type="video/webm">
+            Your browser does not support embedded video.
+        </video>
+
+        <!-- Our own minimal control: play/pause only -->
+        <button type="button" id="video-toggle" class="video-toggle" aria-label="Pause video">
+            <span aria-hidden="true">&#10074;&#10074;</span>
+        </button>
+        </div>
+    </section>
         <!-- ================= CULTURE SECTION =================
              Paraphrased from the real site's "More Than a Dealership"
              messaging — restated in our own words, not copied. -->
         <section class="culture-section">
-            <!-- IMAGE SLOT: the "culture wall" — a curated display wall
-                 of memorabilia, art or branding inside the showroom -->
-            <img src="Images/Culture.png" style="object-position: 50% 40%;" alt="Pharoah Group client celebrating a vehicle handover with a red bow on the car">
+            <img src="Images/Culture.png" width="900" height="624" loading="lazy" alt="Pharoah Group culture wall display">
             <div class="culture-text">
                 <h2>More Than a Dealership</h2>
                 <p>
@@ -278,5 +295,26 @@
         </div>
     </footer>
 
+    <!-- Lightbox overlay for the Part 3 image gallery (populated by JS) -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+            <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+        </div>
+    </div>
+
+    <script src="JS/script.js" defer></script>
 </body>
 </html>
+
+
+
+ <!-- References
+  Learn HTML Basics by BroCodes
+  link= https://youtu.be/BAx2GaMW2qA?si=2QIoNRiWYbi6S8x5 
+  
+  HTML video tag by Pcwebschool
+  link= https://youtu.be/ts0mU1_fQVA?si=cqVOfGJd5Hgezudg-->

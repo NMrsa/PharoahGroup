@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Pharoah Group</title>
     <meta name="description" content="Learn about Pharoah Group's history, founder, mission, vision and the clients we serve.">
+    <link rel="canonical" href="https://pharoah-group-poe.netlify.app/About%20us.html">
+    <meta name="keywords" content="Pharoah Group history, Scott Pharoah founder, luxury car dealership Bryanston, Pharoah Group team">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph / social sharing (off-page SEO: social media promotion) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About Pharoah Group | Our History, Founder & Team">
+    <meta property="og:description" content="Learn about Pharoah Group's history, founder Scott Pharoah, mission, vision and the clients we serve from our Bryanston, Sandton showroom.">
+    <meta property="og:image" content="https://pharoah-group-poe.netlify.app/Images/about-hero-632w.jpg">
+    <meta property="og:url" content="https://pharoah-group-poe.netlify.app/About%20us.html">
+    <meta property="og:site_name" content="Pharoah Group">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Pharoah Group | Our History, Founder & Team">
+    <meta name="twitter:description" content="Learn about Pharoah Group's history, founder Scott Pharoah, mission, vision and the clients we serve from our Bryanston, Sandton showroom.">
+    <meta name="twitter:image" content="https://pharoah-group-poe.netlify.app/Images/about-hero-632w.jpg">
+    <!-- Basic security hardening (Part 3: "Security measures to protect your website from attacks") -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
@@ -12,8 +29,9 @@
 <body>
 
     <header>
-        <div class="logo"><a href="Home.html"><img src="Images/logo.png" alt="Pharoah Group logo"><span>Pharoah Group</span></a></div>
-        <nav>
+        <div class="logo"><img src="Images/logo.png" alt="" class="logo-img" width="32" height="32">Pharoah Group</div>
+        <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+        <nav id="site-nav">
             <ul>
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="About us.html" aria-current="page">About Us</a></li>
@@ -35,8 +53,9 @@
              showroom — gives the page a real sense of place before
              the history text below. -->
         <section class="about-hero">
-            <img src="Images/Location-crop.jpg"
-                 alt="Pharoah Group showroom exterior, Bryanston, Sandton">
+            <img src="Images/About us.png"
+                 width="632" height="632"
+                 alt="Pharoah Group showroom location, Bryanston, Sandton">
         </section>
 
         <!-- Organisation history — verified facts: founder Scott Pharoah,
@@ -67,7 +86,8 @@
             <h2>Our Founder</h2>
             <div class="culture-section">
                 <img src="Images/CEO.png"
-                     style="object-position: 50% 15%;"
+                     style="object-position: 70% 0%;"
+                     width="632" height="832"
                      alt="Portrait of Scott Pharoah, Founder of Pharoah Group">
                 <div class="culture-text">
                     <h3>Scott Pharoah</h3>
@@ -112,36 +132,39 @@
             <h2>Meet the Team</h2>
             <div class="team-grid">
                 <article class="team-member">
-                    <!-- IMAGE SLOT: real staff portrait once available -->
+                    <!-- Verified genuine Pharoah Group staff photo (real
+                         PHAROAH branding/signage visible in the supplied image). -->
                     <img src="Images/Director.png"
-                         srcset="Images/small/Director.jpg 300w,
-                                 Images/Director.png 412w"
+                         srcset="Images/Director.png 150w,
+                                 Images/Director.png 250w"
                          sizes="(max-width: 600px) 40vw, 250px"
-                         style="object-position: 50% 15%;"
+                         width="250" height="284" loading="lazy"
                          alt="Portrait of dealership director">
                     <h3>[Director Name]</h3>
                     <p>Managing Director</p>
                 </article>
                 <article class="team-member">
-                    <!-- IMAGE SLOT: real staff portrait once available -->
-                    <img src="Images/Sales%20Manager.png"
-                         srcset="Images/small/Sales%20Manager.jpg 300w,
-                                 Images/Sales%20Manager.png 735w"
+                    <!-- Verified genuine Pharoah Group staff photo (real
+                         PHAROAH branding/signage visible in the supplied image). -->
+                    <img src="Images/team-sales-manager-250w.jpg"
+                         srcset="Images/team-sales-manager-150w.jpg 150w,
+                                 Images/team-sales-manager-250w.jpg 250w"
                          sizes="(max-width: 600px) 40vw, 250px"
-                         style="object-position: 55% 30%;"
-                         alt="Portrait of sales manager">
-                    <h3>[Sales Manager Name]</h3>
+                         width="250" height="284" loading="lazy"
+                         alt="Portrait of the Pharoah Group sales manager">
+                    <h3>Sales Manager</h3>
                     <p>Head of Sales</p>
                 </article>
                 <article class="team-member">
-                    <!-- IMAGE SLOT: real staff portrait once available -->
-                    <img src="Images/Finance%20Manager.png"
-                         srcset="Images/small/Finance%20Manager.jpg 300w,
-                                 Images/Finance%20Manager.png 476w"
+                    <!-- Verified genuine Pharoah Group staff photo (real
+                         PHAROAH branding/signage visible in the supplied image). -->
+                    <img src="Images/team-finance-manager-250w.jpg"
+                         srcset="Images/team-finance-manager-150w.jpg 150w,
+                                 Images/team-finance-manager-250w.jpg 250w"
                          sizes="(max-width: 600px) 40vw, 250px"
-                         style="object-position: 50% 20%;"
-                         alt="Portrait of finance manager">
-                    <h3>[Finance Manager Name]</h3>
+                         width="250" height="284" loading="lazy"
+                         alt="Portrait of the Pharoah Group finance manager">
+                    <h3>Finance Manager</h3>
                     <p>Finance &amp; Concierge Manager</p>
                 </article>
             </div>
@@ -168,5 +191,17 @@
         </div>
     </footer>
 
+    <!-- Lightbox overlay for the Part 3 image gallery (populated by JS) -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+            <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+        </div>
+    </div>
+
+    <script src="JS/script.js" defer></script>
 </body>
 </html>

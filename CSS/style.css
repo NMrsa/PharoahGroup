@@ -139,11 +139,27 @@ header {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.5rem;
     color: var(--color-dark);
     letter-spacing: 0.03em;
+}
+
+/* The source logo.png is a black square containing a circular white
+   badge graphic. Rendered as a plain square <img> it would show
+   unwanted black corners around the badge, so we mask it circular
+   with border-radius + object-fit: cover to crop in on just the
+   circular badge itself. */
+.logo-img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 header nav ul {
@@ -217,28 +233,52 @@ section {
     border-radius: var(--radius);
 }
 
-/* CHANGE — VIDEO SECTION (added this session)
-   <video> has no intrinsic block styling of its own, so it needs
-   width/height rules just like <img> does. width:100% + height:auto
-   keeps it responsive; max-width stops it stretching too wide on
-   very large desktop screens. */
-.video-section video {
-    width: 100%;
-    max-width: 24rem;   /* showroom clip is a vertical (9:16) video */
-    max-height: 85vh;
-    aspect-ratio: 9 / 16;
-    background: #000;
-    height: auto;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    display: block;
+/* ===== Showroom video: clean, silent, no native controls ===== */
+.video-wrap {
+    position: relative;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.video-section {
-    text-align: center;
+.video-wrap video {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+    pointer-events: none;          /* no hover overlays, no right-click menu on the video */
 }
 
+/* Belt and braces: hide any native control parts if a browser still shows them */
+.video-wrap video::-webkit-media-controls,
+.video-wrap video::-webkit-media-controls-enclosure,
+.video-wrap video::-webkit-media-controls-panel,
+.video-wrap video::-webkit-media-controls-current-time-display,
+.video-wrap video::-webkit-media-controls-time-remaining-display,
+.video-wrap video::-webkit-media-controls-timeline,
+.video-wrap video::-webkit-media-controls-mute-button,
+.video-wrap video::-webkit-media-controls-volume-slider,
+.video-wrap video::-webkit-media-controls-fullscreen-button,
+.video-wrap video::-webkit-media-controls-overflow-button {
+    display: none !important;
+}
+
+.video-toggle {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 44px;                   /* 44px minimum touch target */
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+.video-toggle:hover { background: rgba(0, 0, 0, 0.85); }
+.video-toggle:active { transform: scale(0.95); }
+.video-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 /* --- Repeating cards: vehicles / team / locations (Flexbox) ---
    flex-wrap + a flex-basis per card gives the same responsive
    "as many columns as fit" behaviour as CSS Grid's auto-fit,
@@ -420,6 +460,18 @@ input[type="submit"]:active {
     box-shadow: var(--shadow-hover);
     transform: translateY(-4px);
     border-color: var(--color-accent);
+}
+
+/* Real supplied vehicle photos have differing aspect ratios, so we
+   give the image a fixed height + object-fit: cover to keep every
+   card the same visual height across the grid. */
+.vehicle-card img {
+    height: 11rem;
+    width: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--radius) - 2px);
+    margin-bottom: var(--space-xs);
+    cursor: pointer; /* these images open in the Part 3 lightbox */
 }
 
 .vehicle-card a {
@@ -608,6 +660,7 @@ textarea:active {
     width: 6rem;
     object-fit: cover;
     border-radius: 50%; /* circular badge-style image, like a logo mark */
+    cursor: pointer; /* these images open in the Part 3 lightbox */
 }
 
 /* --- Quick-action cards (Sell Your Car / Finance) --- */
@@ -655,54 +708,6 @@ textarea:active {
 
 .culture-section .culture-text {
     flex: 1 1 22rem;
-}
-
-/* --- Real photo sizing (added when the site images were dropped in) ---
-   The photos come in mixed shapes (portrait, square, landscape), so each
-   slot gets a fixed aspect ratio + object-fit: cover to keep cards even.
-   Per-image focal points are set with inline object-position. */
-.logo a {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.logo img {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.vehicle-card img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    margin-bottom: var(--space-xs);
-}
-
-.team-member img {
-    width: 100%;
-    max-width: 15.6rem;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    margin: 0 auto var(--space-xs);
-}
-
-.about-hero img {
-    width: 100%;
-    max-width: 40rem;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    object-position: 50% 65%;
-    margin: 0 auto;
-}
-
-.location img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    object-position: 50% 65%;
 }
 
 /* --- Social links row (footer) --- */
@@ -851,3 +856,387 @@ textarea:active {
         height: 14rem;
     }
 }
+
+/* ===========================================================
+   7. PART 3 — JAVASCRIPT-DRIVEN COMPONENTS
+   New for Part 3: mobile nav toggle, scroll-reveal animation,
+   image lightbox, FAQ accordion, vehicle search/filter bar,
+   Leaflet map container, and form validation/async-submit
+   feedback styling. Grouped here (rather than scattered through
+   section 6) so every Part 3 addition is easy to find and mark.
+   =========================================================== */
+
+/* --- Mobile nav toggle button (hidden on desktop) --- */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--color-dark);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+}
+
+.nav-toggle:focus {
+    outline: 3px solid var(--color-accent-light);
+    outline-offset: 2px;
+}
+
+/* --- Scroll-reveal animation (JS adds .is-visible via IntersectionObserver) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* --- Image Lightbox (vehicle-card and subbrand-card images open here) --- */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(10, 10, 10, 0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+}
+
+.lightbox-overlay.is-open {
+    display: flex;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    text-align: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: var(--radius);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+    color: #fff;
+    margin-top: var(--space-sm);
+    font-size: 0.95rem;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox-close {
+    top: -3.25rem;
+    right: 0;
+}
+
+.lightbox-prev { left: -3.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: -3.5rem; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 600px) {
+    .lightbox-prev { left: 0.25rem; }
+    .lightbox-next { right: 0.25rem; }
+    .lightbox-close { top: 0.25rem; right: 0.25rem; }
+}
+
+/* --- FAQ Accordion --- */
+.accordion-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-xs);
+    overflow: hidden;
+}
+
+.accordion-trigger {
+    width: 100%;
+    text-align: left;
+    background-color: var(--color-surface);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.accordion-trigger:hover {
+    background-color: var(--color-bg);
+}
+
+.accordion-trigger:focus {
+    outline: 3px solid var(--color-accent-light);
+    outline-offset: -3px;
+}
+
+.accordion-icon {
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: var(--color-bg);
+}
+
+.accordion-panel p {
+    padding: 0 var(--space-md) var(--space-sm);
+}
+
+/* --- Vehicle search / filter / sort bar (Services.html) --- */
+.inventory-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: flex-end;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.inventory-controls .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.inventory-controls label {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-muted);
+}
+
+.inventory-controls input,
+.inventory-controls select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+}
+
+.inventory-count {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-bottom: var(--space-sm);
+}
+
+.vehicle-card.is-hidden {
+    display: none;
+}
+
+.no-results {
+    display: none;
+    padding: var(--space-md);
+    text-align: center;
+    color: var(--color-muted);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius);
+}
+
+.no-results.is-visible {
+    display: block;
+}
+
+/* --- Leaflet interactive map container --- */
+.leaflet-map {
+    width: 100%;
+    height: 300px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    margin-top: var(--space-sm);
+    z-index: 1; /* keep below the sticky header */
+}
+
+/* --- Form validation + async submission feedback --- */
+.field-error {
+    display: none;
+    color: #b42318;
+    font-size: 0.8125rem;
+    margin-top: -0.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.field-error.is-visible {
+    display: block;
+}
+
+input.is-invalid,
+textarea.is-invalid,
+select.is-invalid {
+    border-color: #b42318;
+}
+
+input.is-valid,
+textarea.is-valid,
+select.is-valid {
+    border-color: #2e7d32;
+}
+
+.form-response {
+    display: none;
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+}
+
+.form-response.is-visible {
+    display: block;
+}
+
+.form-response.success {
+    background-color: #eaf6ec;
+    border-color: #2e7d32;
+    color: #1b4d21;
+}
+
+.form-response.error {
+    background-color: #fdecea;
+    border-color: #b42318;
+    color: #7a241a;
+}
+
+.form-response h3 {
+    margin-bottom: var(--space-xs);
+}
+
+.form-response dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem var(--space-sm);
+    margin-top: var(--space-sm);
+    font-size: 0.9375rem;
+}
+
+.form-response dt {
+    font-weight: 700;
+}
+
+.form-spinner {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-top: var(--space-xs);
+}
+
+.form-spinner.is-visible {
+    display: flex;
+}
+
+.form-spinner .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.form-spinner .dot:nth-child(2) { animation-delay: 0.15s; }
+.form-spinner .dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes pulse {
+    0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+}
+
+/* --- Responsive: nav collapses to a toggle menu on tablet/mobile --- */
+@media (max-width: 1024px) {
+    .nav-toggle {
+        display: inline-block;
+    }
+
+    header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        display: none;
+    }
+
+    header nav.is-open {
+        display: block;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    header nav ul li {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    header nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    header nav ul li a {
+        display: block;
+        padding: var(--space-sm) 0;
+    }
+
+    .inventory-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+<!-- References
+  Learn CSS in 1 hour by BroCodez
+  link= https://youtu.be/wRNinF7YQqQ?si=gFNwivm-ItnP15h0 --> 

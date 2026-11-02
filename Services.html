@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Vehicles | Pharoah Group</title>
     <meta name="description" content="Browse Pharoah Group's Auto Investments and ORIGINS collections, plus 6IXPCK Customs, Skär Wheels, Espresso, FOAM Car Wash and Black Velvet Rentals.">
+    <link rel="canonical" href="https://pharoah-group-poe.netlify.app/Services.html">
+    <meta name="keywords" content="Lamborghini for sale South Africa, Porsche dealer Sandton, Ferrari dealer Johannesburg, luxury SUV Sandton, BMW M4 for sale, buy supercar Bryanston">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph / social sharing (off-page SEO: social media promotion) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Our Vehicles | Pharoah Group">
+    <meta property="og:description" content="Browse Pharoah Group's Auto Investments and ORIGINS collections, plus 6IXPCK Customs, Skär Wheels, Espresso, FOAM Car Wash and Black Velvet Rentals.">
+    <meta property="og:image" content="https://pharoah-group-poe.netlify.app/Images/tier-investments.jpg">
+    <meta property="og:url" content="https://pharoah-group-poe.netlify.app/Services.html">
+    <meta property="og:site_name" content="Pharoah Group">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Our Vehicles | Pharoah Group">
+    <meta name="twitter:description" content="Browse Pharoah Group's Auto Investments and ORIGINS collections, plus 6IXPCK Customs, Skär Wheels, Espresso, FOAM Car Wash and Black Velvet Rentals.">
+    <meta name="twitter:image" content="https://pharoah-group-poe.netlify.app/Images/tier-investments.jpg">
+    <!-- Basic security hardening (Part 3: "Security measures to protect your website from attacks") -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
@@ -12,8 +29,9 @@
 <body>
 
     <header>
-        <div class="logo"><a href="Home.html"><img src="Images/logo.png" alt="Pharoah Group logo"><span>Pharoah Group</span></a></div>
-        <nav>
+        <div class="logo"><img src="Images/logo.png" alt="" class="logo-img" width="32" height="32">Pharoah Group</div>
+        <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+        <nav id="site-nav">
             <ul>
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="About us.html">About Us</a></li>
@@ -31,6 +49,53 @@
             <p>Two collections, one standard of excellence. Contact us to arrange a viewing.</p>
         </section>
 
+        <!-- ================= SEARCH / FILTER / SORT =================
+             Part 3 requirement: "Implement a search functionality to
+             filter and sort content". Filters every .vehicle-card on
+             this page (both tiers) by make and body type, by a free-text
+             search, and re-sorts the visible cards by price. All of the
+             filtering logic lives in JS/script.js. -->
+        <section class="inventory-controls" aria-label="Filter and sort vehicles">
+            <div class="field">
+                <label for="vehicle-search">Search</label>
+                <input type="search" id="vehicle-search" placeholder="e.g. Ferrari, SUV, Golf...">
+            </div>
+            <div class="field">
+                <label for="vehicle-make">Make</label>
+                <select id="vehicle-make">
+                    <option value="all">All makes</option>
+                    <option value="Lamborghini">Lamborghini</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Land Rover">Land Rover</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes-AMG">Mercedes-AMG</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="vehicle-type">Body Type</label>
+                <select id="vehicle-type">
+                    <option value="all">All types</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Hatchback">Hatchback</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="vehicle-sort">Sort By</label>
+                <select id="vehicle-sort">
+                    <option value="default">Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="name-asc">Name: A &ndash; Z</option>
+                </select>
+            </div>
+        </section>
+        <p class="inventory-count" id="inventory-count" aria-live="polite"></p>
+
         <!-- ================= AUTO INVESTMENTS TIER =================
              NOTE: the vehicles below are representative example listings
              for this coursework project, not a live feed of Pharoah
@@ -40,61 +105,57 @@
         <section class="inventory">
             <h2>Pharoah Auto Investments</h2>
             <p>Our flagship collection &mdash; vehicles over R1,000,000.</p>
-            <div class="vehicle-grid">
+            <div class="vehicle-grid" id="vehicle-grid-investments">
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Lamborghini on the showroom floor -->
-                    <img src="Images/Aventador.png"
-                         srcset="Images/small/Aventador.jpg 300w,
-                                 Images/Aventador.png 537w"
+                <article class="vehicle-card" data-make="Lamborghini" data-type="Coupe" data-price="5890000" data-name="Lamborghini Aventador">
+                    <img src="Images/vehicle-aventador-400w.jpg"
+                         srcset="Images/vehicle-aventador-300w.jpg 300w,
+                                 Images/vehicle-aventador-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 70%;"
-                         alt="Lamborghini Aventador">
+                         width="400" height="396" loading="lazy"
+                         alt="Lamborghini Aventador on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Lamborghini Aventador">
                     <h2>Lamborghini Aventador</h2>
                     <p>Coupe &bull; Example listing &bull; From R 5,890,000</p>
                     <p>Uncompromising Italian performance with a naturally aspirated V12 heart.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Porsche on the showroom floor -->
-                    <img src="Images/911.png"
-                         srcset="Images/small/911.jpg 300w,
-                                 Images/911.png 412w"
+                <article class="vehicle-card" data-make="Porsche" data-type="Coupe" data-price="3780000" data-name="Porsche 911 Turbo S">
+                    <img src="Images/vehicle-911-400w.jpg"
+                         srcset="Images/vehicle-911-300w.jpg 300w,
+                                 Images/vehicle-911-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 80%;"
-                         alt="Porsche 911 Turbo S">
+                         width="400" height="549" loading="lazy"
+                         alt="Porsche 911 Turbo S on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Porsche 911 Turbo S">
                     <h2>Porsche 911 Turbo S</h2>
                     <p>Coupe &bull; Example listing &bull; From R 3,780,000</p>
                     <p>Iconic performance and everyday usability in Porsche's most complete sports car.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Ferrari on the showroom floor -->
-                    <img src="Images/Ferrari.png"
-                         srcset="Images/small/Ferrari.jpg 300w,
-                                 Images/Ferrari.png 572w"
+                <article class="vehicle-card" data-make="Ferrari" data-type="Coupe" data-price="6450000" data-name="Ferrari Roma">
+                    <img src="Images/vehicle-ferrari-400w.jpg"
+                         srcset="Images/vehicle-ferrari-300w.jpg 300w,
+                                 Images/vehicle-ferrari-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 65%;"
-                         alt="Ferrari Roma">
+                         width="400" height="399" loading="lazy"
+                         alt="Ferrari Roma on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Ferrari Roma">
                     <h2>Ferrari Roma</h2>
                     <p>Coupe &bull; Example listing &bull; From R 6,450,000</p>
                     <p>Effortless elegance paired with unmistakable Ferrari performance.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Range Rover on the showroom floor -->
-                    <img src="Images/SVR.png"
-                         srcset="Images/small/SVR.jpg 300w,
-                                 Images/SVR.png 707w"
+                <article class="vehicle-card" data-make="Land Rover" data-type="SUV" data-price="3150000" data-name="Range Rover SV">
+                    <img src="Images/vehicle-svr-400w.jpg"
+                         srcset="Images/vehicle-svr-300w.jpg 300w,
+                                 Images/vehicle-svr-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 50%;"
-                         alt="Range Rover Sport SVR">
-                    <h2>Range Rover Sport SVR</h2>
+                         width="400" height="295" loading="lazy"
+                         alt="Range Rover SV on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Range Rover SV">
+                    <h2>Range Rover SV</h2>
                     <p>SUV &bull; Example listing &bull; From R 3,150,000</p>
-                    <p>Supercharged V8 performance wrapped in Range Rover luxury.</p>
+                    <p>Uncompromising luxury and capability from Land Rover's flagship SUV.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
@@ -105,66 +166,64 @@
         <section class="inventory">
             <h2>ORIGINS by Pharoah</h2>
             <p>Premium vehicles up to R1,000,000.</p>
-            <div class="vehicle-grid">
+            <div class="vehicle-grid" id="vehicle-grid-origins">
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: BMW M model on the showroom floor -->
-                    <img src="Images/BMW%20M4.png"
-                         srcset="Images/small/BMW%20M4.jpg 300w,
-                                 Images/BMW%20M4.png 751w"
+                <article class="vehicle-card" data-make="BMW" data-type="Coupe" data-price="980000" data-name="BMW M4 Competition">
+                    <img src="Images/vehicle-bmw-m4-400w.jpg"
+                         srcset="Images/vehicle-bmw-m4-300w.jpg 300w,
+                                 Images/vehicle-bmw-m4-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 35%;"
-                         alt="BMW M4 Competition">
+                         width="400" height="291" loading="lazy"
+                         alt="BMW M4 Competition on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="BMW M4 Competition">
                     <h2>BMW M4 Competition</h2>
                     <p>Coupe &bull; Example listing &bull; From R 980,000</p>
                     <p>Precision German engineering with genuine everyday usability.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Mercedes-AMG on the showroom floor -->
-                    <img src="Images/C63.png"
-                         srcset="Images/small/C63.jpg 300w,
-                                 Images/C63.png 595w"
+                <article class="vehicle-card" data-make="Mercedes-AMG" data-type="Sedan" data-price="950000" data-name="Mercedes-AMG C63">
+                    <img src="Images/vehicle-c63-400w.jpg"
+                         srcset="Images/vehicle-c63-300w.jpg 300w,
+                                 Images/vehicle-c63-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 55%;"
-                         alt="Mercedes-AMG C63">
+                         width="400" height="417" loading="lazy"
+                         alt="Mercedes-AMG C63 on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Mercedes-AMG C63">
                     <h2>Mercedes-AMG C63</h2>
                     <p>Sedan &bull; Example listing &bull; From R 950,000</p>
                     <p>AMG performance with Mercedes-Benz refinement and comfort.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Audi RS on the showroom floor -->
-                    <img src="Images/RS%20Q8.png"
-                         srcset="Images/small/RS%20Q8.jpg 300w,
-                                 Images/RS%20Q8.png 537w"
+                <article class="vehicle-card" data-make="Audi" data-type="SUV" data-price="995000" data-name="Audi RS Q8">
+                    <img src="Images/vehicle-rsq8-400w.jpg"
+                         srcset="Images/vehicle-rsq8-300w.jpg 300w,
+                                 Images/vehicle-rsq8-400w.jpg 400w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 50%;"
-                         alt="Audi RS Q8">
+                         width="400" height="436" loading="lazy"
+                         alt="Audi RS Q8 on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Audi RS Q8">
                     <h2>Audi RS Q8</h2>
                     <p>SUV &bull; Example listing &bull; From R 995,000</p>
                     <p>A performance SUV that balances daily practicality with real pace.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
-                <article class="vehicle-card">
-                    <!-- IMAGE SLOT: Volkswagen Golf R on the showroom floor -->
-                    <img src="Images/Golf%207GTI.png"
-                         srcset="Images/small/Golf%207GTI.jpg 300w,
-                                 Images/Golf%207GTI.png 385w"
+                <article class="vehicle-card" data-make="Volkswagen" data-type="Hatchback" data-price="750000" data-name="Volkswagen Golf 7 GTI">
+                    <img src="Images/vehicle-golf-gti-385w.jpg"
+                         srcset="Images/vehicle-golf-gti-300w.jpg 300w,
+                                 Images/vehicle-golf-gti-385w.jpg 385w"
                          sizes="(max-width: 600px) 90vw, 400px"
-                         style="object-position: 50% 65%;"
-                         alt="Volkswagen Golf 7 GTI">
+                         width="385" height="387" loading="lazy"
+                         alt="Volkswagen Golf 7 GTI on the Pharoah Group showroom floor" data-lightbox="gallery" data-caption="Volkswagen Golf 7 GTI">
                     <h2>Volkswagen Golf 7 GTI</h2>
                     <p>Hatchback &bull; Example listing &bull; From R 750,000</p>
-                    <p>The definitive hot hatch &mdash; quick, practical and easy to live with.</p>
+                    <p>A pocket-rocket hatch with sharp handling and everyday usability.</p>
                     <a href="Enquiry.html">Enquire About This Vehicle</a>
                 </article>
 
             </div>
         </section>
+
+        <p class="no-results" id="no-results">No vehicles match your search. Try clearing a filter or searching a different make.</p>
 
         <!-- ================= SUB-BRAND SERVICES ================= -->
         <section class="dealership-services">
@@ -186,30 +245,71 @@
             <h2>Our Divisions</h2>
             <div class="subbrand-grid">
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: 6IXPCK Customs workshop -->
-                    <img src="Images/6ixPCK%20Customs.png" alt="6IXPCK Customs paint protection film advert">
+                    <img src="Images/subbrand-6ixpck.jpg" width="400" height="389" loading="lazy" alt="6IXPCK Customs workshop" data-lightbox="gallery" data-caption="6IXPCK Customs">
                     <h4>6IXPCK Customs</h4>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: Skär Wheels product shot -->
-                    <img src="Images/Shar%20wheels.png" alt="Skär Wheels black forged wheel">
+                    <img src="Images/subbrand-skar-wheels.jpg" width="400" height="407" loading="lazy" alt="Skär Wheels product" data-lightbox="gallery" data-caption="Skär Wheels">
                     <h4>Sk&auml;r Wheels</h4>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: Espresso lounge interior -->
-                    <img src="Images/Espresso.jpg" style="object-position: 50% 60%;" alt="Espresso lounge interior">
+                    <img src="Images/subbrand-espresso.jpg" width="400" height="600" loading="lazy" alt="Espresso lounge interior" data-lightbox="gallery" data-caption="Pharoah Espresso">
                     <h4>Espresso</h4>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: FOAM Car Wash bay -->
-                    <img src="Images/Foam%20car%20wash.png" alt="Car covered in foam at the FOAM Car Wash bay">
+                    <img src="Images/subbrand-foam.jpg" width="400" height="231" loading="lazy" alt="FOAM Car Wash bay" data-lightbox="gallery" data-caption="FOAM Car Wash">
                     <h4>FOAM Car Wash</h4>
                 </article>
                 <article class="subbrand-card">
-                    <!-- IMAGE SLOT: Black Velvet Rentals fleet vehicle -->
-                    <img src="Images/Rentals.png" alt="White BMW from the Black Velvet Rentals fleet">
+                    <img src="Images/subbrand-rentals.jpg" width="400" height="292" loading="lazy" alt="Black Velvet Rentals fleet vehicle" data-lightbox="gallery" data-caption="Black Velvet Rentals">
                     <h4>Black Velvet Rentals</h4>
                 </article>
+            </div>
+        </section>
+
+        <!-- ================= FAQ ACCORDION =================
+             Part 3 requirement: interactive accordion built with
+             vanilla JavaScript (JS/script.js), no framework needed
+             for this scope. -->
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion" id="vehicle-faq">
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>Can I trade in my current vehicle?</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Yes. Submit an enquiry marked "Sell My Car / Trade-In Valuation" and our team will arrange a fair, fast valuation that can be put toward your next vehicle.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>Do you offer vehicle finance?</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Yes, through our banking partners. Choose "Finance Application" on the Enquiry page and a finance consultant will contact you with tailored options.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>What is the difference between Auto Investments and ORIGINS?</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Pharoah Auto Investments is our flagship collection of vehicles over R1,000,000. ORIGINS by Pharoah covers premium vehicles up to R1,000,000, so there's a tier to suit most buyers.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger" aria-expanded="false">
+                        <span>Can 6IXPCK Customs work on a car I didn't buy from Pharoah?</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Yes. 6IXPCK Customs takes on styling, wraps and custom build projects regardless of where the vehicle was purchased &mdash; get in touch via the Enquiry page.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -234,5 +334,17 @@
         </div>
     </footer>
 
+    <!-- Lightbox overlay for the Part 3 image gallery (populated by JS) -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+            <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+        </div>
+    </div>
+
+    <script src="JS/script.js" defer></script>
 </body>
 </html>

@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enquiry | Pharoah Group</title>
     <meta name="description" content="Submit a sales, valuation or finance enquiry to Pharoah Group.">
+    <link rel="canonical" href="https://pharoah-group-poe.netlify.app/Enquiry.html">
+    <meta name="keywords" content="car sales enquiry Sandton, sell my car Bryanston, vehicle finance application South Africa">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph / social sharing (off-page SEO: social media promotion) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Make an Enquiry | Pharoah Group">
+    <meta property="og:description" content="Submit a sales, trade-in, finance, 6IXPCK Customs or Black Velvet rental enquiry to Pharoah Group's Bryanston showroom.">
+    <meta property="og:image" content="https://pharoah-group-poe.netlify.app/Images/tier-origins.jpg">
+    <meta property="og:url" content="https://pharoah-group-poe.netlify.app/Enquiry.html">
+    <meta property="og:site_name" content="Pharoah Group">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Make an Enquiry | Pharoah Group">
+    <meta name="twitter:description" content="Submit a sales, trade-in, finance, 6IXPCK Customs or Black Velvet rental enquiry to Pharoah Group's Bryanston showroom.">
+    <meta name="twitter:image" content="https://pharoah-group-poe.netlify.app/Images/tier-origins.jpg">
+    <!-- Basic security hardening (Part 3: "Security measures to protect your website from attacks") -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
@@ -12,8 +29,9 @@
 <body>
 
     <header>
-        <div class="logo"><a href="Home.html"><img src="Images/logo.png" alt="Pharoah Group logo"><span>Pharoah Group</span></a></div>
-        <nav>
+        <div class="logo"><img src="Images/logo.png" alt="" class="logo-img" width="32" height="32">Pharoah Group</div>
+        <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+        <nav id="site-nav">
             <ul>
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="About us.html">About Us</a></li>
@@ -31,22 +49,33 @@
             <p>Whether you're interested in a vehicle, selling your car, finance, 6IXPCK Customs, or a Black Velvet rental, our team is here to help.</p>
         </section>
 
-        <!-- Enquiry form. In Part 3, JavaScript will add client-side
-             validation and dynamic fields depending on enquiry type. -->
+        <!-- Enquiry form. Client-side validated by JS/script.js. Once
+             validated, a simulated async ("AJAX-style") request runs and
+             the user is shown a dynamically generated response covering
+             cost/availability based on their selected enquiry type and
+             vehicle of interest — there is no live backend on this static
+             site, so the response is generated from a small lookup table
+             in JS rather than a real server call; this is documented in
+             the README. -->
         <section class="enquiry-form">
-            <form action="#" method="post">
+            <form id="enquiry-form" action="#" method="post" novalidate>
 
                 <fieldset>
                     <legend>Your Details</legend>
 
                     <label for="full-name">Full Name</label>
-                    <input type="text" id="full-name" name="full-name" required>
+                    <input type="text" id="full-name" name="full-name" required minlength="2" autocomplete="name">
+                    <span class="field-error" id="full-name-error">Please enter your full name (at least 2 characters).</span>
 
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                    <span class="field-error" id="email-error">Please enter a valid email address.</span>
 
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <input type="tel" id="phone" name="phone" required
+                           pattern="^(\+27|0)[0-9\s]{9,12}$"
+                           placeholder="e.g. 082 123 4567" autocomplete="tel">
+                    <span class="field-error" id="phone-error">Please enter a valid South African phone number, e.g. 082 123 4567.</span>
                 </fieldset>
 
                 <fieldset>
@@ -62,16 +91,23 @@
                         <option value="rental">Black Velvet Rental Enquiry</option>
                         <option value="other">Other</option>
                     </select>
+                    <span class="field-error" id="enquiry-type-error">Please select the type of enquiry.</span>
 
                     <label for="vehicle-interest">Vehicle of Interest (if applicable)</label>
-                    <input type="text" id="vehicle-interest" name="vehicle-interest" placeholder="e.g. Lamborghini Huracán">
+                    <input type="text" id="vehicle-interest" name="vehicle-interest" placeholder="e.g. Lamborghini Aventador">
 
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
+                    <textarea id="message" name="message" rows="6" required minlength="10"></textarea>
+                    <span class="field-error" id="message-error">Your message should be at least 10 characters.</span>
                 </fieldset>
 
                 <button type="submit">Submit Enquiry</button>
+                <p class="form-spinner" id="enquiry-spinner" aria-live="polite">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span> Checking availability&hellip;
+                </p>
             </form>
+
+            <div class="form-response" id="enquiry-response" aria-live="polite"></div>
         </section>
 
     </main>
@@ -95,5 +131,17 @@
         </div>
     </footer>
 
+    <!-- Lightbox overlay for the Part 3 image gallery (populated by JS) -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+            <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+        </div>
+    </div>
+
+    <script src="JS/script.js" defer></script>
 </body>
 </html>
