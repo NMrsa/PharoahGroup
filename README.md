@@ -1,10 +1,10 @@
 # Pharoah Group Website
 
 ## Student Information
-- **Name:** [Insert Your Full Name]
-- **Student Number:** [Insert Your Student Number]
+- **Name:** [Nhlonipho Mkhonto]
+- **Student Number:** [ST10502546]
 - **Module:** Web Development (Introduction) — WEDE5020
-- **Group:** [Insert Group, if applicable]
+- **Group:** [2]
 
 ## Project Overview
 This repository contains the Portfolio of Evidence (PoE) for the WEDE5020 module,
